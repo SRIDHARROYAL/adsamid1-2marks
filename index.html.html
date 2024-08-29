@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm Study Guide</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #6dd5fa, #2980b9);
+            color: #444;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-top: 40px;
+            animation: slideDown 1s ease-out forwards;
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.8;
+            margin-left: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            transform: scale(0);
+            opacity: 0;
+            animation: fadeIn 0.8s forwards;
+        }
+
+        .question {
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        .question h3 {
+            font-size: 22px;
+            color: #34495e;
+            margin-bottom: 12px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideDown {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Login Styles */
+        .login-container {
+            max-width: 400px;
+            margin: 60px auto;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            animation: fadeIn 1.5s forwards;
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #444;
+        }
+
+        .login-container input[type="text"], 
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 14px;
+            margin: 15px 0;
+            border: 2px solid #2980b9;
+            border-radius: 10px;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .login-container input[type="text"]:focus, 
+        .login-container input[type="password"]:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 14px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .login-container button:hover {
+            background-color: #2980b9;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .login-container {
+                width: 90%;
+            }
+
+            .question h3 {
+                font-size: 20px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="loginPage" class="login-container">
+        <h2>Login to Study Guide</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="validateLogin()">Login</button>
+        <p id="errorMsg" class="error">Invalid username or password. Please try again.</p>
+    </div>
+
+    <div id="contentPage" class="container" style="display: none;">
+        <h1>Algorithm Study Guide</h1>
+
+        <!-- Question 1 -->
+        <div class="question">
+            <h3>1. Time & Space Complexity of an Algorithm</h3>
+            <p>
+                Time complexity measures how long an algorithm takes to complete as a function of input size. Common time complexities:
+                <ul>
+                    <li><strong>O(1)</strong>: Constant time - The algorithm's performance does not change with input size.</li>
+                    <li><strong>O(n)</strong>: Linear time - Performance grows linearly with input size.</li>
+                    <li><strong>O(n²)</strong>: Quadratic time - Performance grows exponentially with input size.</li>
+                    <li><strong>O(log n)</strong>: Logarithmic time - The algorithm's performance grows slowly compared to input size.</li>
+                </ul>
+                Space complexity refers to the memory an algorithm needs. Efficient algorithms aim to balance time and space complexities, as these affect real-world performance, especially in resource-constrained environments.
+            </p>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question">
+            <h3>2. Insertion in an AVL Tree</h3>
+            <p>
+                AVL Trees are self-balancing binary search trees. They maintain a logarithmic height by ensuring that the height difference (balance factor) between the left and right subtrees is no more than 1.
+                <br><br>
+                **Insertion Steps**:
+                <ol>
+                    <li>Insert like in a binary search tree.</li>
+                    <li>Update the height of the ancestor nodes.</li>
+                    <li>Check the balance factor for the ancestor nodes. If unbalanced, perform rotations:
+                        <ul>
+                            <li><strong>Single Rotation:</strong> LL or RR rotation.</li>
+                            <li><strong>Double Rotation:</strong> LR or RL rotation.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </p>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question">
+            <h3>3. Insertion in a B-Tree</h3>
+            <p>
+                A B-Tree is a self-balancing search tree ideal for systems with block-based storage, like databases.
+                <br><br>
+                **Insertion Steps**:
+                <ol>
+                    <li>Find the correct node for insertion.</li>
+                    <li>Insert the key while keeping the node's keys sorted.</li>
+                    <li>If the node becomes full, split it and promote the middle key to the parent node.</li>
+                    <li>Repeat the process if necessary, potentially splitting the root and increasing tree height.</li>
+                </ol>
+            </p>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question">
+            <h3>4. Directed vs Undirected Graph</h3>
+            <p>
+                A **directed graph** contains edges with directions. These graphs are common in representing relationships like web links, where direction matters.
+                <br><br>
+                An **undirected graph** has no edge directions, making the relationships bidirectional. These graphs can represent roads, mutual friendships, or network connections where direction isn't relevant.
+            </p>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question">
+            <h3>5. Define Divide and Conquer</h3>
+            <p>
+                Divide and Conquer is an algorithmic strategy that breaks down problems into smaller subproblems, solves them independently, and combines their solutions.
+                <br><br>
+                **Key Examples**:
+                <ul>
+                    <li><strong>Merge Sort:</strong> Recursively splits and merges arrays.</li>
+                    <li><strong>Quick Sort:</strong> Recursively partitions arrays around a pivot.</li>
+                    <li><strong>Binary Search:</strong> Repeatedly divides the search space in half.</li>
+                </ul>
+            </p>
+        </div>
+
+               <!-- Question 6 -->
+               <div class="question">
+                <h3>6. Types of Tree Traversal</h3>
+                <p>
+                    Tree traversal is the process of visiting each node in a tree data structure, exactly once, in a systematic way. There are three primary types of tree traversal:
+                    <ul>
+                        <li><strong>In-order Traversal:</strong> Visit the left subtree, then the root node, followed by the right subtree. This traversal on binary search trees results in nodes being visited in ascending order.</li>
+                        <li><strong>Pre-order Traversal:</strong> Visit the root node first, then recursively traverse the left subtree and the right subtree. This is often used to create a copy of the tree.</li>
+                        <li><strong>Post-order Traversal:</strong> Traverse the left subtree, then the right subtree, and visit the root node last. This is useful for deleting a tree as it ensures that child nodes are deleted before the parent.</li>
+                        <li><strong>Level-order Traversal (Breadth-First):</strong> Visit nodes level by level, from top to bottom, left to right. This is useful for finding the shortest path in an unweighted tree.</li>
+                    </ul>
+                </p>
+            </div>
+    
+            <!-- Question 7 -->
+            <div class="question">
+                <h3>7. Max Heap & Min Heap</h3>
+                <p>
+                    Heaps are specialized binary trees used to implement priority queues. There are two main types of heaps:
+                    <ul>
+                        <li><strong>Max Heap:</strong> In a Max Heap, the value of each node is greater than or equal to the values of its children, ensuring that the root node is the largest element. It's used in algorithms like Heap Sort and to implement priority queues.</li>
+                        <li><strong>Min Heap:</strong> In a Min Heap, the value of each node is less than or equal to the values of its children, making the root node the smallest element. Min heaps are used in algorithms like Dijkstra's shortest path algorithm.</li>
+                    </ul>
+                    Both heaps are complete binary trees, ensuring operations such as insertion and deletion of elements are efficient, with a time complexity of O(log n).
+                </p>
+            </div>
+    
+            <!-- Question 8 -->
+            <div class="question">
+                <h3>8. Applications of AVL Trees</h3>
+                <p>
+                    AVL Trees are highly efficient self-balancing binary search trees. Their key applications include:
+                    <ul>
+                        <li><strong>Database Indexing:</strong> AVL trees are used to maintain balanced indices for quick lookups, inserts, and deletes.</li>
+                        <li><strong>File Systems:</strong> Many file systems use AVL trees to maintain sorted directory structures, allowing quick navigation and searching.</li>
+                        <li><strong>Memory Management:</strong> AVL trees are used in dynamic memory allocation systems to keep track of free memory blocks.</li>
+                        <li><strong>Routing Tables:</strong> In networks, AVL trees help store and efficiently retrieve routing information.</li>
+                    </ul>
+                </p>
+            </div>
+    
+            <!-- Question 9 -->
+            <div class="question">
+                <h3>9. Applications of Heap Trees</h3>
+                <p>
+                    Heap trees have a variety of applications due to their efficiency in managing priority data:
+                    <ul>
+                        <li><strong>Priority Queues:</strong> Heaps are commonly used to implement priority queues, where the most important element is always quickly accessible.</li>
+                        <li><strong>Heap Sort:</strong> A sorting algorithm that uses a heap to sort data in O(n log n) time.</li>
+                        <li><strong>Graph Algorithms:</strong> Min-heaps are essential in algorithms like Dijkstra's shortest path, where the smallest element (shortest path) is needed at each step.</li>
+                        <li><strong>Job Scheduling:</strong> In computer systems, heaps are used to schedule jobs based on their priority to optimize performance.</li>
+                    </ul>
+                </p>
+            </div>
+            <script>
+                function validateLogin() {
+                    var username = document.getElementById('username').value;
+                    var password = document.getElementById('password').value;
+                    var errorMsg = document.getElementById('errorMsg');
+            
+                    // Example validation: static credentials
+                    if (username === 'sri' && password === 'dhar') {
+                        document.getElementById('loginPage').style.display = 'none';
+                        document.getElementById('contentPage').style.display = 'block';
+                    } else {
+                        errorMsg.innerText = 'Invalid username or password. Please try again.';
+                    }
+                }
+            
+                document.addEventListener('keydown', function (event) {
+                    if (event.key === 'Enter') {
+                        validateLogin();
+                    }
+                });
+            </script>
+    </div>
+    </div>
+</body>
+
+</html>                
